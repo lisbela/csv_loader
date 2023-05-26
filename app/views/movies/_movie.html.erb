@@ -1,0 +1,5 @@
+<div id="<%= dom_id movie %>" style="padding:=0.5em; background-color:silver; margin:0.5em;">
+    <p>
+        <strong><%= link_to movie.title, movie %></strong>
+        <em><%= movie.reviews.average(:rating) %></em>
+</div>

@@ -1,0 +1,22 @@
+<h1><%= @movie.title %></h1>
+
+<p><%= @movie.description %></p>
+<p><%= @movie.year %></p>
+<p><%= @movie.director %></p>
+
+<ul>
+  <li><%= link_to "Edit", edit_movie_path(@movie) %></li>
+  <li><%= link_to "Destroy", movie_path(@movie), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %></li>
+</ul>
+
+<h2>Reviews</h2>
+<%= render @movie.reviews %>
+
+<h2>Actors</h2>
+<%= render @movie.cast_members %>
+
+<h2>Locations</h2>
+<%= render @movie.locations %>

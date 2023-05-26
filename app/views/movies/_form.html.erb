@@ -1,0 +1,35 @@
+<%= form_with model: movie do |form| %>
+  <div>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %><br>
+  </div>
+
+  <div>
+    <%= form.label :year %><br>
+    <%= form.number_field :year %><br>
+  </div>
+
+  <div>
+    <%= form.label :director %><br>
+    <%= form.text_field :director %><br>
+  </div>
+
+  <div>
+    <%= form.label :location %><br>
+    <%= form.text_field :location %><br>
+  </div>
+
+  <div>
+    <%= form.label :country %><br>
+    <%= form.text_field :country %><br>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

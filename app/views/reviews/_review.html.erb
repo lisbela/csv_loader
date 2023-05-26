@@ -1,0 +1,11 @@
+<div id="<%= dom_id review %>" style="padding:=0.5em; background-color:silver; margin:0.5em;">
+    <p>
+        <strong><%= review.user_name %></strong>
+        <em><%= review.comments %></em>
+        <em><%= review.rating %></em>
+        <li><%= link_to "Destroy", [review.movie, review], data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %></li>
+    </p>
+</div>

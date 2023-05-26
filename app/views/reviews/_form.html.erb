@@ -1,0 +1,17 @@
+<%= form_with model: [ @movie, @movie.reviews.build ] do |form| %>
+  <p>
+    <%= form.label :user_name %><br>
+    <%= form.text_field :user_name %>
+  </p>
+  <p>
+    <%= form.label :comments %><br>
+    <%= form.text_area :comments %>
+  </p>
+  <p>
+    <%= form.label :rating %><br>
+    <%= form.select :rating, [1,2,3,4,5] %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

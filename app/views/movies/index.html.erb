@@ -1,0 +1,33 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Movies Loader </h1>
+
+<%= form_with url: import_movies_path, method: :post do |form| %>
+  <%= form.file_field :file, accept: ".csv" %>
+  <%= form.button "Import" %>
+<% end %>
+
+<h1>Reviews Loader </h1>
+
+<%= form_with url: import_reviews_path, method: :post do |form| %>
+  <%= form.file_field :file, accept: ".csv" %>
+  <%= form.button "Import" %>
+<% end %>
+
+<h1>Search by Actor</h1>
+<%= form_tag movies_path, :method => "get" do %>
+    <%= label_tag(:search, "What actor would you like to find:") %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag("Search", :name => nil)%>
+ <% end %>   
+
+<h1>
+  Movies:
+</h1>
+
+<div id="movies">
+  <% @movies.each do |movie| %>
+    <%= render movie %>
+  <% end %>
+</div>
+
