@@ -41,9 +41,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_091004) do
     t.string "description"
     t.integer "year"
     t.string "director"
-    t.string "actor"
-    t.string "location"
-    t.string "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "average_rating"

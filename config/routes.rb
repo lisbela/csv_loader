@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   resources :reviews do
     collection { post :import }
   end
+
+  resources :cast_members
 end
