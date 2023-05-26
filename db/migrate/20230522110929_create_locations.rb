@@ -4,7 +4,6 @@ class CreateLocations < ActiveRecord::Migration[7.0]
       t.references :movie, null: false, foreign_key: true
       t.references :country, null: false, foreign_key: true
       t.string :name
-      t.string :country
 
       t.timestamps
     end

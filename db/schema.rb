@@ -10,12 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_25_103317) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
+ActiveRecord::Schema[7.0].define(version: 2023_05_26_084417) do
   create_table "cast_members", force: :cascade do |t|
-    t.bigint "movie_id", null: false
+    t.integer "movie_id", null: false
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -29,9 +26,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_103317) do
   end
 
   create_table "locations", force: :cascade do |t|
-    t.bigint "movie_id", null: false
-    t.bigint "country_id", null: false
+    t.integer "movie_id", null: false
+    t.integer "country_id", null: false
     t.string "name"
+    t.string "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_locations_on_country_id"
@@ -43,13 +41,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_103317) do
     t.string "description"
     t.integer "year"
     t.string "director"
+    t.string "actor"
+    t.string "location"
+    t.string "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "average_rating"
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.bigint "movie_id", null: false
-    t.bigint "user_id", null: false
+    t.integer "movie_id", null: false
+    t.integer "user_id", null: false
     t.string "comments"
     t.integer "rating"
     t.datetime "created_at", null: false
