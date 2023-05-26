@@ -54,7 +54,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_091004) do
     t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "movie_name"
     t.index ["movie_id", "rating"], name: "index_reviews_on_movie_id_and_rating"
     t.index ["movie_id"], name: "index_reviews_on_movie_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
