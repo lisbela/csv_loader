@@ -15,12 +15,12 @@ class Movie < ApplicationRecord
             cast_member_id = CastMember.where("name LIKE ?", "%#{search}%").pluck(:movie_id)
             if cast_member_id.any?
                 Rails.logger.info("cast_member_id: #{cast_member_id}")
-                self.where(id: cast_member_id)
+                self.where(id: cast_member_id).ordered
             else
-                Movie.ordered.all
+                Movie.ordered
             end
         else
-            Movie.ordered.all
+            Movie.ordered
         end
     end
 
