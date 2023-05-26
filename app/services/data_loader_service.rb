@@ -37,7 +37,6 @@ class DataLoaderService
     csv.each do |row|
         review_hash =  {}
         review_hash[:movie_name] = row['Movie']
-        #review_hash[:user_name] = row['User']
         review_hash[:rating] = row['Stars']
         review_hash[:comments] = row['Review']
 
