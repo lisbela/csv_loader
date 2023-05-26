@@ -37,15 +37,15 @@ class DataLoaderService
     csv.each do |row|
         review_hash =  {}
         review_hash[:movie_name] = row['Movie']
-        review_hash[:user_name] = row['User']
+        #review_hash[:user_name] = row['User']
         review_hash[:rating] = row['Stars']
         review_hash[:comments] = row['Review']
 
-        user = User.find_by(name: review_hash[:user_name])
+        user = User.find_by(name: row['User'])
         movie = Movie.find_by(title: review_hash[:movie_name])
 
         if user.nil? 
-            user = User.create(name: review_hash[:user_name])
+            user = User.create(name: row['User'])
         end
 
         review_hash[:user_id] = user.id
@@ -56,7 +56,7 @@ class DataLoaderService
         else
             review_hash[:movie_id] = movie.id
         end
-        Rails.logger.info("Loading review - user: #{review_hash[:user_name]}")
+        Rails.logger.info("Loading review - user: #{row['User']}")
         Review.find_or_create_by!(review_hash)
     end
   end

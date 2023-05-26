@@ -8,7 +8,7 @@ class Movie < ApplicationRecord
     validates :year, presence: true, numericality: { only_integer: true }
     validates :director, presence: true
 
-    scope :ordered, -> { joins(:reviews).group('movies.id').order('AVG(reviews.rating) DESC')}
+    scope :ordered, -> { order(average_rating: :desc) }
 
     def self.search(search)
         if search
@@ -23,4 +23,9 @@ class Movie < ApplicationRecord
             Movie.ordered.all
         end
     end
+
+    def update_average_rating
+        update_column(:average_rating, reviews.average(:rating))
+      end 
+    
 end

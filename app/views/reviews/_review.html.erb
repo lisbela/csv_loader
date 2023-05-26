@@ -1,6 +1,6 @@
 <div id="<%= dom_id review %>" style="padding:=0.5em; background-color:silver; margin:0.5em;">
     <p>
-        <strong><%= review.user_name %></strong>
+        <strong><%= review.user.name %></strong>
         <em><%= review.comments %></em>
         <em><%= review.rating %></em>
         <li><%= link_to "Destroy", [review.movie, review], data: {

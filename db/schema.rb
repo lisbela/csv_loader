@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_26_084417) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_26_091004) do
   create_table "cast_members", force: :cascade do |t|
     t.integer "movie_id", null: false
     t.string "name"
@@ -47,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_084417) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "average_rating"
+    t.index ["average_rating"], name: "index_movies_on_average_rating"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -56,6 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_084417) do
     t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "movie_name"
     t.index ["movie_id", "rating"], name: "index_reviews_on_movie_id_and_rating"
     t.index ["movie_id"], name: "index_reviews_on_movie_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
