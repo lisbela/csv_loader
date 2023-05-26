@@ -27,6 +27,6 @@ class Movie < ApplicationRecord
     def update_average_rating
         return if destroyed?
         update_column(:average_rating, reviews.average(:rating))
-      end 
+    end 
     
 end
