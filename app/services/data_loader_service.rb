@@ -11,9 +11,9 @@ class DataLoaderService
         movie_hash[:description] = row['Description']
         movie_hash[:year] = row['Year']
         movie_hash[:director] = row['Director']
-        movie_hash[:actor] = row['Actor']
-        movie_hash[:location] = row['Filming location']
-        movie_hash[:country] = row['Country']
+        actor = row['Actor']
+        location_name = row['Filming location']
+        country_name = row['Country']
 
         movie = Movie.find_by(title: movie_hash[:title])
         
@@ -24,9 +24,10 @@ class DataLoaderService
             movie = Movie.create(movie_hash)
         end
 
-        Country.find_or_create_by!(name: movie_hash[:country])
-        validate_cast(movie_hash, movie)
-        validate_location(movie_hash, movie)
+        country = Country.find_or_create_by!(name: country_name)
+    
+        validate_cast(actor, movie.id)
+        validate_location(location_name, country, movie.id)
     end
   end
 
@@ -36,12 +37,11 @@ class DataLoaderService
 
     csv.each do |row|
         review_hash =  {}
-        review_hash[:movie_name] = row['Movie']
         review_hash[:rating] = row['Stars']
         review_hash[:comments] = row['Review']
 
         user = User.find_by(name: row['User'])
-        movie = Movie.find_by(title: review_hash[:movie_name])
+        movie = Movie.find_by(title: row['Movie'])
 
         if user.nil? 
             user = User.create(name: row['User'])
@@ -62,23 +62,22 @@ class DataLoaderService
 
   private
 
-    def validate_cast(movie_hash, movie)
-        cast_member = CastMember.where(name: movie_hash[:actor], movie_id: movie.id).first
+    def validate_cast(actor, movie_id)
+        cast_member = CastMember.where(name: actor, movie_id: movie_id).first
 
         if cast_member.nil?
-            Rails.logger.info("Loading movie actor: #{movie_hash[:actor]}")
-            CastMember.create(movie_id: movie.id, name: movie_hash[:actor])
+            Rails.logger.info("Loading movie actor: #{actor}")
+            CastMember.create(movie_id: movie_id, name: actor)
         end
 
     end
 
-    def validate_location(movie_hash, movie)
-        location = Location.where(movie_id: movie.id, name: movie_hash[:location]).first
-        country_data = Country.where(name: movie_hash[:country]).first
+    def validate_location(location, country, movie_id)
+        location = Location.where(movie_id: movie_id, name: location).first
 
         if location.nil?
-            Rails.logger.info "Creating location #{movie_hash[:location]} with country #{country_data.name}"
-            Location.create(movie_id: movie.id, country_id: country_data.id, name: movie_hash[:location])
+            Rails.logger.info "Creating location #{location} with country #{country.name}"
+            Location.create(movie_id: movie_id, country_id: country.id, name: location)
         end
     end
 end
